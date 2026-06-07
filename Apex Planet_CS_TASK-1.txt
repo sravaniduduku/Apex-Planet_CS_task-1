@@ -1,0 +1,195 @@
+# =====================================================
+# TASK 1 - Cybersecurity Foundations Project
+# =====================================================
+
+import hashlib
+import socket
+import platform
+from cryptography.fernet import Fernet
+
+# =====================================================
+# 1. Cybersecurity Concepts
+# =====================================================
+
+print("=" * 50)
+print("CYBERSECURITY FOUNDATIONS PROJECT")
+print("=" * 50)
+
+print("\nCIA TRIAD")
+print("1. Confidentiality")
+print("2. Integrity")
+print("3. Availability")
+
+# =====================================================
+# 2. Hashing (SHA256)
+# =====================================================
+
+def generate_hash(text):
+    return hashlib.sha256(text.encode()).hexdigest()
+
+message = input("\nEnter a message for hashing: ")
+
+hashed_value = generate_hash(message)
+
+print("\nSHA256 Hash:")
+print(hashed_value)
+
+# =====================================================
+# 3. Symmetric Encryption & Decryption
+# =====================================================
+
+print("\nGenerating Encryption Key...")
+
+key = Fernet.generate_key()
+cipher = Fernet(key)
+
+encrypted_message = cipher.encrypt(message.encode())
+
+print("\nEncrypted Message:")
+print(encrypted_message.decode())
+
+decrypted_message = cipher.decrypt(encrypted_message)
+
+print("\nDecrypted Message:")
+print(decrypted_message.decode())
+
+# =====================================================
+# 4. System Information
+# =====================================================
+
+print("\nSYSTEM INFORMATION")
+
+print("Operating System :", platform.system())
+print("Release          :", platform.release())
+print("Machine          :", platform.machine())
+print("Processor        :", platform.processor())
+
+# =====================================================
+# 5. Networking Basics
+# =====================================================
+
+hostname = socket.gethostname()
+ip_address = socket.gethostbyname(hostname)
+
+print("\nNETWORK INFORMATION")
+print("Hostname :", hostname)
+print("IP Address :", ip_address)
+
+# =====================================================
+# 6. DNS Lookup
+# =====================================================
+
+website = input("\nEnter a website (example: google.com): ")
+
+try:
+    website_ip = socket.gethostbyname(website)
+
+    print("\nDNS LOOKUP RESULT")
+    print("Website :", website)
+    print("IP Address :", website_ip)
+
+except Exception as e:
+    print("Error:", e)
+
+# =====================================================
+# 7. Port Scanner
+# =====================================================
+
+def scan_port(host, port):
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(1)
+
+        result = sock.connect_ex((host, port))
+
+        if result == 0:
+            print(f"Port {port} : OPEN")
+
+        sock.close()
+
+    except:
+        pass
+
+target = input("\nEnter target IP for port scan: ")
+
+print("\nScanning Common Ports...")
+
+common_ports = [
+    20, 21, 22, 23, 25,
+    53, 80, 110, 143,
+    443, 445, 3306, 8080
+]
+
+for port in common_ports:
+    scan_port(target, port)
+
+# =====================================================
+# 8. Threat Awareness
+# =====================================================
+
+print("\nCOMMON CYBER THREATS")
+
+threats = [
+    "Phishing",
+    "Malware",
+    "Ransomware",
+    "SQL Injection",
+    "DDoS Attack",
+    "Brute Force Attack"
+]
+
+for i, threat in enumerate(threats, start=1):
+    print(f"{i}. {threat}")
+
+# =====================================================
+# 9. Password Strength Checker
+# =====================================================
+
+password = input("\nEnter a password to test strength: ")
+
+strength = 0
+
+if len(password) >= 8:
+    strength += 1
+
+if any(c.isupper() for c in password):
+    strength += 1
+
+if any(c.islower() for c in password):
+    strength += 1
+
+if any(c.isdigit() for c in password):
+    strength += 1
+
+if any(not c.isalnum() for c in password):
+    strength += 1
+
+print("\nPASSWORD ANALYSIS")
+
+if strength <= 2:
+    print("Weak Password")
+
+elif strength <= 4:
+    print("Medium Password")
+
+else:
+    print("Strong Password")
+
+# =====================================================
+# 10. Final Report
+# =====================================================
+
+print("\n" + "=" * 50)
+print("TASK 1 COMPLETED SUCCESSFULLY")
+print("=" * 50)
+
+print("\nModules Demonstrated:")
+print("✓ Hashing (SHA256)")
+print("✓ Encryption & Decryption")
+print("✓ Networking Basics")
+print("✓ DNS Lookup")
+print("✓ Port Scanning")
+print("✓ Password Analysis")
+print("✓ Cybersecurity Concepts")
+
+print("\nThank You!")
