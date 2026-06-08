@@ -2,7 +2,6 @@
 
 This project is a beginner-friendly Cybersecurity Foundations application developed in Python. It demonstrates essential cybersecurity concepts such as cryptography, hashing, networking, DNS lookup, port scanning, and password strength analysis.
 
-The project was created as part of the **ApexPlanet Cybersecurity & Ethical Hacking Internship – Task 1 (Foundation & Environment Setup)**.
 
 ##  Objectives
 
